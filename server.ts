@@ -5,22 +5,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
 
-const domino = require('domino');
-const fs = require('fs');
-const path = require('path');
-
-const template = fs
-  .readFileSync(path.join('dist/shohoz-ticket/browser', 'index.html'))
-  .toString();
-
-global['localStorage'] = localStorage;
-const window = domino.createWindow(template);
-global['window'] = window;
-global['document'] = window.document;
-global['console'] = window.console;
-global['history'] = window.history;
-(global as any).navigator = window.navigator;
-
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
