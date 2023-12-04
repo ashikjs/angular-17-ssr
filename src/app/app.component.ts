@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {afterRender, AfterRenderOptions, Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -9,6 +9,16 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'ssr-rnd';
+
+  constructor() {
+    afterRender(() =>  {
+      console.log(window)
+      console.log(document)
+    })
+  }
+
+  ngOnInit() {
+  }
 }
